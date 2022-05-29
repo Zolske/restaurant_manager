@@ -120,27 +120,29 @@ os.environ["SECRET_KEY"] = "WHAT_EVER_YOU_WANT"
 heroku config:set SECRET_KEY=WHAT_EVER_YOU_WANT --app restaurant-manager-2022
 ```
 
-_Heroku/settings/Reveal_Config_Vars should look like this :_  
-![heroku_config_var](images/heroku_config_var.jpg)
+_add the environment variable "**PORT**" to "**8000**" :_
 
-9. add the "**Heroku host name**" to the list of allow hosts and **'localhost'** for testing :
+```
+heroku config:set PORT=8000
+```
+
+9. add the "**Heroku host name**" to the list of allow hosts, **'localhost'** and **'127.0.0.1'** for testing :
 
 ```python
 # ... django_project/settings.py
-ALLOWED_HOSTS = ['restaurant-manager-2022.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['restaurant-manager-2022.herokuapp.com', 'localhost', '127.0.0.1']
 ```
 
-10. create the file "**Procfile**" with the content of **'web: gunicorn django_project.wsgi --log-file -'** :
+10. create the file "**Procfile**" with the content of **'web: gunicorn django_project.wsgi'** :
 
 ```
-New-Item Procfile ; Set-Content Procfile 'web: gunicorn django_project.wsgi --log-file -'
+New-Item Procfile ; Set-Content Procfile 'web: gunicorn django_project.wsgi'
 ```
 
 - **web** allow for web traffic
 - **gunicorn** use Gunicorn as webserver
 - **django_project** the name of the project
 - **.wsgi** Web Server Gateway Interface, describes how a web server communicates with web applications
-- **--log-file -** the flag --log-file - makes any logging messages visible to us
 
 11. check if you are connected to the right Heroku app :
 
