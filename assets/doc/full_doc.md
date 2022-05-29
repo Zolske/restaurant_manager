@@ -360,6 +360,12 @@ git push
 git push heroku main
 ```
 
+5. see full log details for deployment :
+
+```powershell
+heroku logs --tail
+```
+
 [back to top](#top)
 
 ---
