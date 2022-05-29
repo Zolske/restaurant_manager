@@ -1,16 +1,18 @@
 # Full Documentation
 
-## project set up (_Windows PowerShell_)
+## project setup (_Windows PowerShell_)
 
-1. [basic set up](#basic-set-up)
-2. [Heroku set up](#heroku-set-up)
-3. [PostgreSql set up](#postgresql)
-4. [Cloudinary set up](#Cloudinary-set-up)
+1. [basic setup](#basic-set-up)
+2. [Heroku setup](#2.-Heroku-setup)
+3. [PostgreSql setup](#postgresql)
+4. [Cloudinary setup](#Cloudinary-set-up)
 5. [change the default template location](#default-template-location)
+6. [Django Debug Toolbar]()
+7. [push to GitHub and Heroku]()
 
 ---
 
-### 1. basic set up : {#basic-set-up}
+### 1. basic setup : {#basic-set-up}
 
 1. create the hidden virtual environment **.venv** :
 
@@ -57,7 +59,7 @@ django-admin startproject django_project .
 
 ---
 
-### 2. Heroku set up : {#heroku-set-up}
+# 2. Heroku setup
 
 1. log into Heroku :
 
@@ -136,9 +138,21 @@ New-Item Procfile ; Set-Content Procfile 'web: gunicorn django_project.wsgi --lo
 - **.wsgi** Web Server Gateway Interface, describes how a web server communicates with web applications
 - **--log-file -** the flag --log-file - makes any logging messages visible to us
 
+11. check if you are connected to the right Heroku app :
+
+```
+git remote -v
+```
+
+_you can change with the command :_
+
+```
+heroku git:remote -a HEROKU_APP_NAME_YOU_WANT_TO_CHANGE_TO
+```
+
 ---
 
-### 3. PostgreSql set up : {#postgresql}
+### 3. PostgreSql setup : {#postgresql}
 
 1. update the **django_project/settings.py** file :
 
@@ -172,7 +186,7 @@ DATABASES = {
 
 ---
 
-### Cloudinary set up : {#Cloudinary-set-up}
+### 4. Cloudinary setup : {#Cloudinary-set-up}
 
 1. log into "Cloudinary" Dashboard/Account Details and copy your "**API Environment variable**"
 
@@ -225,7 +239,7 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 ---
 
-### change the default template location : {#default-template-location}
+### 5. change the default template location : {#default-template-location}
 
 1. add the following code to set the default template location :
 
@@ -246,4 +260,80 @@ TEMPLATES = [
 
 ```powershell
 New-Item 'media', 'static', 'templates' -ItemType Directory
+```
+
+---
+
+### 6."Django Debug Toolbar"
+
+Adds a browser based toolbar to the html template. **Note**: the html template must have **html** and **body** tag. [link to Debug Toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#process)
+
+1. Install the Package :
+
+```
+ python -m pip install django-debug-toolbar
+```
+
+2. add "debug_toolbar" to the INSTALLED_APPS = [ ... ] :
+
+```python
+# ... django_project/settings.py
+INSTALLED_APPS = [
+    # ...
+    'debug_toolbar',
+]
+```
+
+3. add the Middleware :
+
+```python
+# ... django_project/settings.py
+MIDDLEWARE = [
+    # ...
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
+```
+
+4. Configure Internal IPs :
+
+```python
+# ... django_project/settings.py
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+```
+
+5. add django-debug-toolbar’s URLs to your project’s URLconf :
+
+```python
+# ... django_project/urls.py
+from django.urls import include, path
+
+urlpatterns = [
+    # ...
+    path('__debug__/', include('debug_toolbar.urls')),
+]
+```
+
+### 7. push to GitHub and Heroku
+
+1. test the for project for bugs by running the local server :
+
+```python
+python manage.py runserver
+```
+
+- \*stop the server with **Ctrl + c\***
+
+2. add all changes to the git staging area and commit :
+
+```powershell
+git add .
+git commit -m "setup project"
+```
+
+3. push to GitHub and Heroku (deploy) :
+
+```powershell
+git push heroku main
 ```
