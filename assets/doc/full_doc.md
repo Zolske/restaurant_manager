@@ -280,7 +280,8 @@ New-Item 'media', 'static', 'templates' -ItemType Directory
 
 ### 6. Django Debug Toolbar
 
-Adds a browser based toolbar to the html template. **Note**: the html template must have **html** and **body** tag. [link to Debug Toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#process)
+Adds a browser based toolbar to the html template. **Note**: the html template must have **html** and **body** tag. [link to Debug Toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#process)  
+**!! only add when there is a html and another 'urlpattern' than 'admin'!!**
 
 1. Install the Package :
 
@@ -317,6 +318,8 @@ INTERNAL_IPS = [
 ]
 ```
 
+- add **"127.0.0.1"** to ALLOWED_HOSTS in django_project/settings.py
+
 5. add django-debug-toolbar’s URLs to your project’s URLconf :
 
 ```python
@@ -328,6 +331,8 @@ urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls')),
 ]
 ```
+
+- Only add when there is another 'urlpatterns' for landing page!
 
 [back to top](#top)
 
