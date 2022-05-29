@@ -344,7 +344,13 @@ git add .
 git commit -m "setup project"
 ```
 
-3. push to GitHub and Heroku (deploy) :
+3. push to GitHub :
+
+```powershell
+git push
+```
+
+4. push to Heroku (deploy) :
 
 ```powershell
 git push heroku main
