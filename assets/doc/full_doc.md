@@ -1,18 +1,20 @@
 # Full Documentation
 
+###### top
+
 ## project setup (_Windows PowerShell_)
 
-1. [basic setup](#basic-set-up)
-2. [Heroku setup](#2.-Heroku-setup)
-3. [PostgreSql setup](#postgresql)
-4. [Cloudinary setup](#Cloudinary-set-up)
-5. [change the default template location](#default-template-location)
-6. [Django Debug Toolbar]()
-7. [push to GitHub and Heroku]()
+1. [basic setup](#1-basic-setup)
+2. [Heroku setup](#2-heroku-setup)
+3. [PostgreSql setup](#3-postgresql-setup)
+4. [Cloudinary setup](#4-cloudinary-setup)
+5. [change the default template location](#5-change-the-default-template-location)
+6. [Django Debug Toolbar](#6-django-debug-toolbar)
+7. [push to GitHub and Heroku](#7-push-to-github-and-heroku)
 
 ---
 
-### 1. basic setup : {#basic-set-up}
+### 1. basic setup
 
 1. create the hidden virtual environment **.venv** :
 
@@ -57,9 +59,11 @@ python -m pip freeze > requirements.txt
 django-admin startproject django_project .
 ```
 
+[back to top](#top)
+
 ---
 
-# 2. Heroku setup
+### 2. Heroku setup
 
 1. log into Heroku :
 
@@ -150,9 +154,11 @@ _you can change with the command :_
 heroku git:remote -a HEROKU_APP_NAME_YOU_WANT_TO_CHANGE_TO
 ```
 
+[back to top](#top)
+
 ---
 
-### 3. PostgreSql setup : {#postgresql}
+### 3. PostgreSql setup
 
 1. update the **django_project/settings.py** file :
 
@@ -184,9 +190,11 @@ DATABASES = {
 }
 ```
 
+[back to top](#top)
+
 ---
 
-### 4. Cloudinary setup : {#Cloudinary-set-up}
+### 4. Cloudinary setup
 
 1. log into "Cloudinary" Dashboard/Account Details and copy your "**API Environment variable**"
 
@@ -237,9 +245,11 @@ MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 ```
 
+[back to top](#top)
+
 ---
 
-### 5. change the default template location : {#default-template-location}
+### 5. change the default template location
 
 1. add the following code to set the default template location :
 
@@ -262,9 +272,11 @@ TEMPLATES = [
 New-Item 'media', 'static', 'templates' -ItemType Directory
 ```
 
+[back to top](#top)
+
 ---
 
-### 6."Django Debug Toolbar"
+### 6. Django Debug Toolbar
 
 Adds a browser based toolbar to the html template. **Note**: the html template must have **html** and **body** tag. [link to Debug Toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#process)
 
@@ -337,3 +349,7 @@ git commit -m "setup project"
 ```powershell
 git push heroku main
 ```
+
+[back to top](#top)
+
+---
