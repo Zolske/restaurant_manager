@@ -203,9 +203,9 @@ heroku config:set DISABLE_COLLECTSTATIC=1 --app restaurant-manager-2022
 # django_project/settings.py
 INSTALLED_APPS = [
 ...
-    'claudinary_storage', #must be above 'django.contrib.staticfiles'
+    'cloudinary_storage', #must be above 'django.contrib.staticfiles'
     'django.contrib.staticfiles',
-    'claudinary', #can be below
+    'cloudinary', #can be below
 ...
 ]
 ```
