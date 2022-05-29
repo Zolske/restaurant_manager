@@ -301,8 +301,8 @@ INSTALLED_APPS = [
 ```python
 # ... django_project/settings.py
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware', #add to top
     # ...
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 ```
 
