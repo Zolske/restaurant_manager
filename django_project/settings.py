@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
+    "accounts.apps.AccountsConfig"
     # 'debug_toolbar',
 ]
 
@@ -138,3 +139,6 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# tell Django to use the new custom user model in place of the built-in User model
+AUTH_USER_MODEL = "accounts.CustomUser"

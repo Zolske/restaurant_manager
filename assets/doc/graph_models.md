@@ -40,11 +40,11 @@ py manage.py graph_models -a -o my_project_visualized.png
 - create a graph for only certain models (**-I Foo,Bar**) in this example for Foo and Bar
 
 ```powershell
-py ./manage.py graph_models -a -I Foo,Bar -o my_project_subsystem.png
+py manage.py graph_models -a -I Foo,Bar -o my_project_subsystem.png
 ```
 
 - the same as above but with arrow shaped arrows (**--arrow-shape normal**) and application grouping (**-g**)
 
 ```powershell
-py ./manage.py graph_models -a -g -I Post,User --arrow-shape normal -o my_project_sans_foo_bar.png
+py manage.py graph_models -a -g -I Post,User --arrow-shape normal -o my_project_sans_foo_bar.png
 ```
