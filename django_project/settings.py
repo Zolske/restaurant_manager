@@ -142,3 +142,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # tell Django to use the new custom user model in place of the built-in User model
 AUTH_USER_MODEL = "accounts.CustomUser"
+
+# redirects the user after logging in and out to the 'home' url
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "home" 
