@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "accounts.apps.AccountsConfig",
     "pages.apps.PagesConfig",
     'debug_toolbar',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
