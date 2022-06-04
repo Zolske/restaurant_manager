@@ -163,3 +163,6 @@ LOGOUT_REDIRECT_URL = "home"
 # Crisp's Bootstrap settings
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# connect the console with the forgotten password option
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
