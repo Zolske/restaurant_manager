@@ -164,5 +164,12 @@ LOGOUT_REDIRECT_URL = "home"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-# connect the console with the forgotten password option
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# send email for real using SMTP with the forgotten password option
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+DEFAULT_FROM_EMAIL = os.environ.get('SEND_GRID_DEFAULT_EMAIL')
+EMAIL_HOST = "smtp.sendgrid.net"
+EMAIL_HOST_USER = "apikey"
+EMAIL_HOST_PASSWORD = os.environ.get('SEND_GRID_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
