@@ -22,9 +22,8 @@ LOGOUT_REDIRECT_URL = "home"
 
 ### create the four necessary templates :
 
-1. **base.html** :
-
-- the part with _{% block content %}_ will be replaced by the other templates/htmls
+1. **base.html** :  
+   The part with _{% block content %}_ will be replaced by the other templates/htmls.
 
 ```html
 <!-- ... templates/base.html -->
@@ -40,9 +39,8 @@ LOGOUT_REDIRECT_URL = "home"
 </html>
 ```
 
-2. **home.html**
-
-Is the home page (_landing page_).
+2. **home.html**  
+   Is the home page (_landing page_).
 
 ```html
 <!-- ... templates/home.html -->
@@ -57,7 +55,7 @@ content %} {% if user.is_authenticated %} Hi {{ user.username }}!
 ```
 
 3. **login.html**
-   The Page the user sees when he wants to log in.s
+   The Page the user see when he wants to log in (_login form_).
 
 ```html
 <!-- ... templates/registration/login.html -->
@@ -72,9 +70,10 @@ content %}
 ```
 
 4. **signup.html**
+   The Page the user see when he wants to sign up (_signup form_).
 
 ```html
-<!-- templates/registration/signup.html -->
+<!-- ... templates/registration/signup.html -->
 {% extends "base.html" %} {% block title %}Sign Up{% endblock title %} {% block
 content %}
 <h2>Sign Up</h2>
@@ -86,6 +85,8 @@ content %}
 ```
 
 ## URLs
+
+Link to the pages.
 
 1. update django_project/urls.py :
 
@@ -119,6 +120,8 @@ urlpatterns = [
 ```
 
 ## Views
+
+Logic to connect user actions with views and model.
 
 1. update accounts/views.py :
 
