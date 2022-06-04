@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
-    "accounts.apps.AccountsConfig"
+    "accounts.apps.AccountsConfig",
+    "pages.apps.PagesConfig",
     # 'debug_toolbar',
 ]
 
