@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "pages.apps.PagesConfig",
     'debug_toolbar',
     'django_extensions',
+    'booking.apps.BookingConfig',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,176 @@
+<!-- home page, starting page when user langs on website, inherits from 'base.html' -->
+{% extends "base.html" %}
+
+{% block title %}Bookings{% endblock title %}
+
+{% block content %}
+<h1>Booking Page</h1>
+<form action="addrecord/" method="post">
+    {% csrf_token %}
+    <!-- <label for="date">booking week :</label>
+<input type="week" id="date" name="booking-date" value="2022-06-08" min="2022-06-06" max="2023-12-31"> -->
+    <label for="date">booking date :</label>
+    <input type="date" id="date" name="new_booking_date" value="2022-06-08" min="2022-06-06" max="2023-12-31">
+    <label for="tabel">number of tables :</label>
+    <input type="number" id="table" name="num_tables" value="1" min="1" max="10" size="4">
+    <label for="time">time slot :</label>
+    <select id="time" name="time_slot">
+        <option value="time_slot_12">12-14</option>
+        <option value="time_slot_14">14-16</option>
+        <option value="time_slot_16">16-18</option>
+        <option value="time_slot_18">18-20</option>
+        <option value="time_slot_20">20-22</option>
+    </select><br>
+    <input type="submit" value="Submit">
+</form>
+
+<table class="table table-striped table-sm">
+    <thead class="table-bordered">
+        <tr>
+            <th rowspan="2" colspan="2" class="text-center align-middle">date</th>
+            <th colspan="6" class="text-center">available table from ...</th>
+        </tr>
+        <tr>
+            <th>12:00</th>
+            <th>14:00</th>
+            <th>16:00</th>
+            <th>18:00</th>
+            <th>20:00</th>
+            <th>22:00</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% if week.Monday%}
+            {% for entry in week.Monday %}
+            <td>Monday</td>
+            <td>{{ entry.booking_date }}</td>
+            <td>{{entry.time_slot_12}}</td>
+            <td>{{entry.time_slot_14}}</td>
+            <td>{{entry.time_slot_16}}</td>
+            <td>{{entry.time_slot_18}}</td>
+            <td>{{entry.time_slot_20}}</td>
+            <td>{{entry.time_slot_22}}</td>
+            {% endfor %}
+            {% else %}
+            <td>Monday</td>
+            <td colspan="7" class="text-center"><i>(has passed)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            {% if week.Tuesday%}
+            {% for entry in week.Tuesday %}
+            <td>Tuesday</td>
+            <td>{{ entry.booking_date }}</td>
+            <td>{{entry.time_slot_12}}</td>
+            <td>{{entry.time_slot_14}}</td>
+            <td>{{entry.time_slot_16}}</td>
+            <td>{{entry.time_slot_18}}</td>
+            <td>{{entry.time_slot_20}}</td>
+            <td>{{entry.time_slot_22}}</td>
+            {% endfor %}
+            {% else %}
+            <td>Tuesday</td>
+            <td colspan="7" class="text-center"><i>(has passed)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            {% if week.Wednesday%}
+            {% for entry in week.Wednesday %}
+            <td>Wednesday</td>
+            <td>{{ entry.booking_date }}</td>
+            <td>{{entry.time_slot_12}}</td>
+            <td>{{entry.time_slot_14}}</td>
+            <td>{{entry.time_slot_16}}</td>
+            <td>{{entry.time_slot_18}}</td>
+            <td>{{entry.time_slot_20}}</td>
+            <td>{{entry.time_slot_22}}</td>
+            {% endfor %}
+            {% else %}
+            <td>Wednesday</td>
+            <td colspan="7" class="text-center"><i>(has passed)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            {% if week.Thursday%}
+            {% for entry in week.Thursday %}
+            <td>Thursday</td>
+            <td>{{ entry.booking_date }}</td>
+            <td>{{entry.time_slot_12}}</td>
+            <td>{{entry.time_slot_14}}</td>
+            <td>{{entry.time_slot_16}}</td>
+            <td>{{entry.time_slot_18}}</td>
+            <td>{{entry.time_slot_20}}</td>
+            <td>{{entry.time_slot_22}}</td>
+            {% endfor %}
+            {% else %}
+            <td>Thursday</td>
+            <td colspan="7" class="text-center"><i>(has passed)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            {% if week.Friday%}
+            {% for entry in week.Friday %}
+            <td>Friday</td>
+            <td>{{ entry.booking_date }}</td>
+            <td>{{entry.time_slot_12}}</td>
+            <td>{{entry.time_slot_14}}</td>
+            <td>{{entry.time_slot_16}}</td>
+            <td>{{entry.time_slot_18}}</td>
+            <td>{{entry.time_slot_20}}</td>
+            <td>{{entry.time_slot_22}}</td>
+            {% endfor %}
+            {% else %}
+            <td>Friday</td>
+            <td colspan="7" class="text-center"><i>(has passed)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            {% if week.Saturday%}
+            {% for entry in week.Saturday %}
+            <td>Saturday</td>
+            <td>{{ entry.booking_date }}</td>
+            <td>{{entry.time_slot_12}}</td>
+            <td>{{entry.time_slot_14}}</td>
+            <td>{{entry.time_slot_16}}</td>
+            <td>{{entry.time_slot_18}}</td>
+            <td>{{entry.time_slot_20}}</td>
+            <td>{{entry.time_slot_22}}</td>
+            {% endfor %}
+            {% else %}
+            <td>Saturday</td>
+            <td colspan="7" class="text-center"><i>(has passed)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            {% if week.Sunday%}
+            {% for entry in week.Sunday %}
+            <td>Sunday</td>
+            <td>{{ entry.booking_date }}</td>
+            <td>{{entry.time_slot_12}}</td>
+            <td>{{entry.time_slot_14}}</td>
+            <td>{{entry.time_slot_16}}</td>
+            <td>{{entry.time_slot_18}}</td>
+            <td>{{entry.time_slot_20}}</td>
+            <td>{{entry.time_slot_22}}</td>
+            {% endfor %}
+            {% else %}
+            <td>Sunday</td>
+            <td colspan="7" class="text-center"><i>(has passed)</i></td>
+            {% endif %}
+        </tr>
+    </tbody>
+    <tfoot class="table-bordered">
+        <tr>
+            <th colspan="2" class="text-center">date</th>
+            <th>12:00</th>
+            <th>14:00</th>
+            <th>16:00</th>
+            <th>18:00</th>
+            <th>20:00</th>
+            <th>22:00</th>
+        </tr>
+    </tfoot>
+</table>
+
+{% endblock content %}

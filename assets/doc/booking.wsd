@@ -1,0 +1,35 @@
+@startuml PERT
+!theme plain
+' object User
+' object Booking
+' object Availability
+title booking diagram
+
+map Availability {
+    available_date  => date, **primary key**
+    available_table_time_slot_12-14 => num, 0-10
+    available_table_time_slot_14-16 => num, 0-10
+    available_table_time_slot_16-18 => num, 0-10
+    available_table_time_slot_18-20 => num, 0-10
+    available_table_time_slot_20-22 => num, 0-10
+}
+
+map Booking {
+    user_name => **foreign key**
+    date_of_booking => date
+    booked_time_slot => string, 12-14, 14-16
+    table_occupation => num, 1-10
+}
+
+map User {
+    user_name => **primary key**
+    email => 
+    telephone =>
+}
+
+Booking::user_name "*" <--- "    1" User::user_name
+
+note "If on the available_date :\n* **available_table_time_slot** is not 0 or\n*if no **record** matching **available_date**\n => user can book\nUpdate **Availability** after booking or cancelation.\nWhen new bookings are made, check if old bookings (before today) and delete." as N2
+Availability <.. N2
+Booking <.. N2
+@enduml
