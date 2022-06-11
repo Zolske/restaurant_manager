@@ -20,11 +20,11 @@ def first_date_of_week(year_week=str):
     Takes the year and the week number and returns the date of the first day (Monday) of the week.
     '''
     first_date = datetime.strptime(year_week + '-1', "%Y-%W-%w")
-    if first_date.strftime("%d") == 1:
+    if first_date.strftime("%d") == '01' or first_date.strftime("%d") == '21' or first_date.strftime("%d") == '31':
         return first_date.strftime("%dst of %b")
-    elif first_date.strftime("%d") == 2:
+    elif first_date.strftime("%d") == '02' or first_date.strftime("%d") == '22':
         return first_date.strftime("%dnd of %b")
-    elif first_date.strftime("%d") == 3:
+    elif first_date.strftime("%d") == '03' or first_date.strftime("%d") == '23':
         return first_date.strftime("%drd of %b")
     else:
         return first_date.strftime("%dth of %b")
@@ -36,11 +36,11 @@ def last_date_of_week(year_week=str):
     Takes the year and the week number and returns the date of the last day (Sunday) of the week.
     '''
     last_date = datetime.strptime(year_week + '-0', "%Y-%W-%w")
-    if last_date.strftime("%d") == 1:
+    if last_date.strftime("%d") == '01' or last_date.strftime("%d") == '21' or last_date.strftime("%d") == '31':
         return last_date.strftime("%dst of %b")
-    elif last_date.strftime("%d") == 2:
+    elif last_date.strftime("%d") == '02' or last_date.strftime("%d") == '22' :
         return last_date.strftime("%dnd of %b")
-    elif last_date.strftime("%d") == 3:
+    elif last_date.strftime("%d") == '03' or last_date.strftime("%d") == '23':
         return last_date.strftime("%drd of %b")
     else:
         return last_date.strftime("%dth of %b")
@@ -114,6 +114,43 @@ def add_missing_records(database):
     for day in date_list:            
         new_record = database(booking_date=day, time_slot_12=10, time_slot_14=10, time_slot_16=10, time_slot_18=10, time_slot_20=10, time_slot_22=10 )
         new_record.save()
+ 
+def write_after_weeks(week_num_after, database):
+    '''
+    Writes the data from the week after this week into a dictionary which it returns.\n 
+    Argument: number of which week after this week e.g. next week is 1, the week after next week is 2 
+    '''
+    # todays date
+    todays_date = datetime.now()
+    # this week as number
+    this_week_is_num = todays_date.strftime("%W")
+    # todays week + how many weeks after
+    week_num = int(this_week_is_num) + int(week_num_after)
+    
+    week_after = {'week_meta':{'week_num':'',
+                              'week_start':'',
+                              'week_end':''},
+                  'Monday':'',
+                  'Tuesday':'',
+                  'Wednesday':'',
+                  'Thursday':'',
+                  'Friday':'',
+                  'Saturday':'',
+                  'Sunday':''}
+    
+    week_after['week_meta']['week_num'] = week_num
+    week_after['week_meta']['week_start'] = first_date_of_week(todays_date.strftime("%Y")+"-"+str(week_num))
+    week_after['week_meta']['week_end'] = last_date_of_week(todays_date.strftime("%Y")+"-"+str(week_num))
+    # find all booking dates and time slots from this week after
+    next_week_booking = list(database.objects.filter(booking_date__week=week_num).order_by('booking_date').values())
+    week_after['Monday'] = next_week_booking[0]
+    week_after['Tuesday'] = next_week_booking[1]
+    week_after['Wednesday'] = next_week_booking[2]
+    week_after['Thursday'] = next_week_booking[3]
+    week_after['Friday'] = next_week_booking[4]
+    week_after['Saturday'] = next_week_booking[5]
+    week_after['Sunday'] = next_week_booking[6]
+    return week_after 
     
 def booking_context_object(database):
     '''
@@ -158,21 +195,34 @@ def booking_context_object(database):
     this_week_meta['week_start'] = first_date_of_week(todays_date.strftime("%Y-%W"))
     this_week_meta['week_end'] = last_date_of_week(todays_date.strftime("%Y-%W"))
     
-    after_weeks = []
-    # attach data for the rest of the next 7 weeks 
-    for week in range(7):
-        next_week_num = int(this_week_is_num) + week +1
-        week_after = []
-        week_meta = {'week_num':'', 'week_start':'', 'week_end':''}
-        # add this weeks +1 week number, start date and end date
-        week_meta['week_num'] = next_week_num
-        week_meta['week_start'] = first_date_of_week(todays_date.strftime("%Y")+"-"+str(next_week_num))
-        week_meta['week_end'] = last_date_of_week(todays_date.strftime("%Y")+"-"+str(next_week_num))
-        week_after.append(week_meta)
-        # find all booking dates from this week +1
-        next_week_booking = list(database.objects.filter(booking_date__week=next_week_num).order_by('booking_date').values())
-        for day in next_week_booking:
-            week_after.append(day)
-        after_weeks.append(week_after)
+    after_weeks = {'week_1':'', 'week_2':'', 'week_3':'', 'week_4':'', 'week_5':'', 'week_6':'', 'week_7':''}
+    after_weeks['week_1'] = write_after_weeks(1, database)
+    after_weeks['week_2'] = write_after_weeks(2, database)
+    after_weeks['week_3'] = write_after_weeks(3, database)
+    after_weeks['week_4'] = write_after_weeks(4, database)
+    after_weeks['week_5'] = write_after_weeks(5, database)
+    after_weeks['week_6'] = write_after_weeks(6, database)
+    after_weeks['week_7'] = write_after_weeks(7, database)
+    
+    # # attach data for the rest of the next 7 weeks
 
+    # for week in range(7):
+    #     week_name = 'week_' + str(week)
+    #     myVars = vars()
+    #     myVars[week_name] = {'week_meta':'',}
+        
+    #     next_week_num = int(this_week_is_num) + week +1
+    #     # week_after = {}
+    #     week_meta = {'week_num':'', 'week_start':'', 'week_end':''}
+    #     # add this weeks +1 week number, start date and end date
+    #     week_meta['week_num'] = next_week_num
+    #     week_meta['week_start'] = first_date_of_week(todays_date.strftime("%Y")+"-"+str(next_week_num))
+    #     week_meta['week_end'] = last_date_of_week(todays_date.strftime("%Y")+"-"+str(next_week_num))
+    #     myVars[week_name] = week_meta
+    #     # find all booking dates from this week +1
+    #     next_week_booking = list(database.objects.filter(booking_date__week=next_week_num).order_by('booking_date').values())
+    #     for day in next_week_booking:
+    #         myVars[week_name] = day
+    #     after_weeks = myVars[week_name]
+        
     return [this_week_dic, this_week_meta, after_weeks]

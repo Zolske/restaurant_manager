@@ -70,14 +70,27 @@ def add_record(request):
     new_booking_date = request.POST['new_booking_date']
     new_time_slot = request.POST['time_slot']
     new_num_tables = request.POST['num_tables']
-    
-    new_record = AvailableTable(booking_date=new_booking_date, time_slot_12=new_num_tables )
-    new_record.save()
-    
-    time_slot_list = ['time_slot_12', 'time_slot_14', 'time_slot_16', 'time_slot_18', 'time_slot_20', 'time_slot_22']
-    # for slot in time_slot_list:
-    #     if slot == new_time_slot:
-    #          new_record = AvailableTable(booking_date=new_booking_date, slot=new_num_tables )
-    #          new_record.save()
-             
+    booking_record = list(AvailableTable.objects.filter(booking_date=new_booking_date).values())
+
+    for record in booking_record[0]:
+        if new_time_slot == record:
+            booking_record[0][record] = int(booking_record[0][record]) - int(new_num_tables)
+            for key, value in booking_record[0].items() :
+                if key == 'booking_date':
+                    value_booking = value
+                if key == 'time_slot_12':
+                    value_12 = value
+                if key == 'time_slot_14':
+                    value_14 = value
+                if key == 'time_slot_16':
+                    value_16 = value
+                if key == 'time_slot_18':
+                    value_18 = value
+                if key == 'time_slot_20':
+                    value_20 = value
+                if key == 'time_slot_22':
+                    value_22 = value
+                   
+            new_record = AvailableTable(booking_date=value_booking, time_slot_12=value_12, time_slot_14=value_14, time_slot_16=value_16, time_slot_18=value_18, time_slot_20=value_20, time_slot_22=value_22 )
+            new_record.save() 
     return HttpResponseRedirect(reverse('bookings'))

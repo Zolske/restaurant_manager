@@ -7,12 +7,10 @@
 <h1>Booking Page</h1>
 <form action="addrecord/" method="post">
     {% csrf_token %}
-    <!-- <label for="date">booking week :</label>
-<input type="week" id="date" name="booking-date" value="2022-06-08" min="2022-06-06" max="2023-12-31"> -->
     <label for="date">booking date :</label>
-    <input type="date" id="date" name="new_booking_date" value="2022-06-08" min="2022-06-06" max="2023-12-31">
+    <input type="date" id="date" name="new_booking_date" min="2022-06-06" max="2023-12-31">
     <label for="tabel">number of tables :</label>
-    <input type="number" id="table" name="num_tables" value="1" min="1" max="10" size="4">
+    <input type="number" id="table" name="num_tables" value="1" min="1" max="10">
     <label for="time">time slot :</label>
     <select id="time" name="time_slot">
         <option value="time_slot_12">12-14</option>
@@ -20,10 +18,10 @@
         <option value="time_slot_16">16-18</option>
         <option value="time_slot_18">18-20</option>
         <option value="time_slot_20">20-22</option>
+        <option value="time_slot_22">22-24</option>
     </select><br>
     <input type="submit" value="Submit">
 </form>
-
 <table class="table table-striped table-sm">
     <thead class="table-bordered">
         <tr>
@@ -55,7 +53,7 @@
             <td>{{this_week_dic.Monday.time_slot_22}}</td>
             {% else %}
             <td>Monday</td>
-            <td colspan="7" class="text-center"><i>(has passed)</i></td>
+            <td colspan="7" class="text-center"><i>(day has passed)</i></td>
             {% endif %}
         </tr>
         <tr>
@@ -70,7 +68,7 @@
             <td>{{this_week_dic.Tuesday.time_slot_22}}</td>
             {% else %}
             <td>Tuesday</td>
-            <td colspan="7" class="text-center"><i>(has passed)</i></td>
+            <td colspan="7" class="text-center"><i>(day has passed)</i></td>
             {% endif %}
         </tr>
         <tr>
@@ -85,7 +83,7 @@
             <td>{{this_week_dic.Wednesday.time_slot_22}}</td>
             {% else %}
             <td>Wednesday</td>
-            <td colspan="7" class="text-center"><i>(has passed)</i></td>
+            <td colspan="7" class="text-center"><i>(day has passed)</i></td>
             {% endif %}
         </tr>
         <tr>
@@ -100,7 +98,7 @@
             <td>{{this_week_dic.Thursday.time_slot_22}}</td>
             {% else %}
             <td>Thursday</td>
-            <td colspan="7" class="text-center"><i>(has passed)</i></td>
+            <td colspan="7" class="text-center"><i>(day has passed)</i></td>
             {% endif %}
         </tr>
         <tr>
@@ -115,7 +113,7 @@
             <td>{{this_week_dic.Friday.time_slot_22}}</td>
             {% else %}
             <td>Friday</td>
-            <td colspan="7" class="text-center"><i>(has passed)</i></td>
+            <td colspan="7" class="text-center"><i>(day has passed)</i></td>
             {% endif %}
         </tr>
         <tr>
@@ -130,7 +128,7 @@
             <td>{{this_week_dic.Saturday.time_slot_22}}</td>
             {% else %}
             <td>Saturday</td>
-            <td colspan="7" class="text-center"><i>(has passed)</i></td>
+            <td colspan="7" class="text-center"><i>(day has passed)</i></td>
             {% endif %}
         </tr>
         <tr>
@@ -145,7 +143,7 @@
             <td>{{this_week_dic.Sunday.time_slot_22}}</td>
             {% else %}
             <td>Sunday</td>
-            <td colspan="7" class="text-center"><i>(has passed)</i></td>
+            <td colspan="7" class="text-center"><i>(day has passed)</i></td>
             {% endif %}
         </tr>
     </tbody>
@@ -161,4 +159,922 @@
         </tr>
     </tfoot>
 </table>
+<!-- week_1 after this week-->
+<table class="table table-striped table-sm">
+    <thead class="table-bordered">
+        <tr>
+            <th colspan="2" class="text-center">Week
+                {{after_weeks.week_1.week_meta.week_num}}</th>
+            <th colspan="6" class="text-center">available table(s) from ...</th>
+        </tr>
+        <tr>
+            <th colspan="2" class="text-center"><i>from the</i> {{after_weeks.week_1.week_meta.week_start}} <i>till
+                    the</i> {{after_weeks.week_1.week_meta.week_end}}</th>
+            <th>12:00</th>
+            <th>14:00</th>
+            <th>16:00</th>
+            <th>18:00</th>
+            <th>20:00</th>
+            <th>22:00</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Monday</td>
+            {% if after_weeks.week_1%}
+            <td>{{after_weeks.week_1.Monday.booking_date}}</td>
+            <td>{{after_weeks.week_1.Monday.time_slot_12}}</td>
+            <td>{{after_weeks.week_1.Monday.time_slot_14}}</td>
+            <td>{{after_weeks.week_1.Monday.time_slot_16}}</td>
+            <td>{{after_weeks.week_1.Monday.time_slot_18}}</td>
+            <td>{{after_weeks.week_1.Monday.time_slot_20}}</td>
+            <td>{{after_weeks.week_1.Monday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Tuesday</td>
+            {% if after_weeks.week_1%}
+            <td>{{after_weeks.week_1.Tuesday.booking_date}}</td>
+            <td>{{after_weeks.week_1.Tuesday.time_slot_12}}</td>
+            <td>{{after_weeks.week_1.Tuesday.time_slot_14}}</td>
+            <td>{{after_weeks.week_1.Tuesday.time_slot_16}}</td>
+            <td>{{after_weeks.week_1.Tuesday.time_slot_18}}</td>
+            <td>{{after_weeks.week_1.Tuesday.time_slot_20}}</td>
+            <td>{{after_weeks.week_1.Tuesday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Wednesday</td>
+            {% if after_weeks.week_1%}
+            <td>{{after_weeks.week_1.Wednesday.booking_date}}</td>
+            <td>{{after_weeks.week_1.Wednesday.time_slot_12}}</td>
+            <td>{{after_weeks.week_1.Wednesday.time_slot_14}}</td>
+            <td>{{after_weeks.week_1.Wednesday.time_slot_16}}</td>
+            <td>{{after_weeks.week_1.Wednesday.time_slot_18}}</td>
+            <td>{{after_weeks.week_1.Wednesday.time_slot_20}}</td>
+            <td>{{after_weeks.week_1.Wednesday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Thursday</td>
+            {% if after_weeks.week_1%}
+            <td>{{after_weeks.week_1.Thursday.booking_date}}</td>
+            <td>{{after_weeks.week_1.Thursday.time_slot_12}}</td>
+            <td>{{after_weeks.week_1.Thursday.time_slot_14}}</td>
+            <td>{{after_weeks.week_1.Thursday.time_slot_16}}</td>
+            <td>{{after_weeks.week_1.Thursday.time_slot_18}}</td>
+            <td>{{after_weeks.week_1.Thursday.time_slot_20}}</td>
+            <td>{{after_weeks.week_1.Thursday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Friday</td>
+            {% if after_weeks.week_1%}
+            <td>{{after_weeks.week_1.Friday.booking_date}}</td>
+            <td>{{after_weeks.week_1.Friday.time_slot_12}}</td>
+            <td>{{after_weeks.week_1.Friday.time_slot_14}}</td>
+            <td>{{after_weeks.week_1.Friday.time_slot_16}}</td>
+            <td>{{after_weeks.week_1.Friday.time_slot_18}}</td>
+            <td>{{after_weeks.week_1.Friday.time_slot_20}}</td>
+            <td>{{after_weeks.week_1.Friday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Saturday</td>
+            {% if after_weeks.week_1%}
+            <td>{{after_weeks.week_1.Saturday.booking_date}}</td>
+            <td>{{after_weeks.week_1.Saturday.time_slot_12}}</td>
+            <td>{{after_weeks.week_1.Saturday.time_slot_14}}</td>
+            <td>{{after_weeks.week_1.Saturday.time_slot_16}}</td>
+            <td>{{after_weeks.week_1.Saturday.time_slot_18}}</td>
+            <td>{{after_weeks.week_1.Saturday.time_slot_20}}</td>
+            <td>{{after_weeks.week_1.Saturday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Sunday</td>
+            {% if after_weeks.week_1%}
+            <td>{{after_weeks.week_1.Sunday.booking_date}}</td>
+            <td>{{after_weeks.week_1.Sunday.time_slot_12}}</td>
+            <td>{{after_weeks.week_1.Sunday.time_slot_14}}</td>
+            <td>{{after_weeks.week_1.Sunday.time_slot_16}}</td>
+            <td>{{after_weeks.week_1.Sunday.time_slot_18}}</td>
+            <td>{{after_weeks.week_1.Sunday.time_slot_20}}</td>
+            <td>{{after_weeks.week_1.Sunday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+    </tbody>
+    <tfoot class="table-bordered">
+        <tr>
+            <th colspan="2" class="text-center">Week {{after_weeks.week_1.week_meta.week_num}}</th>
+            <th>12:00</th>
+            <th>14:00</th>
+            <th>16:00</th>
+            <th>18:00</th>
+            <th>20:00</th>
+            <th>22:00</th>
+        </tr>
+    </tfoot>
+</table>
+<!-- week_2 after this week-->
+<table class="table table-striped table-sm">
+    <thead class="table-bordered">
+        <tr>
+            <th colspan="2" class="text-center">Week
+                {{after_weeks.week_2.week_meta.week_num}}</th>
+            <th colspan="6" class="text-center">available table(s) from ...</th>
+        </tr>
+        <tr>
+            <th colspan="2" class="text-center"><i>from the</i> {{after_weeks.week_2.week_meta.week_start}} <i>till
+                    the</i> {{after_weeks.week_2.week_meta.week_end}}</th>
+            <th>12:00</th>
+            <th>14:00</th>
+            <th>16:00</th>
+            <th>18:00</th>
+            <th>20:00</th>
+            <th>22:00</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Monday</td>
+            {% if after_weeks.week_2%}
+            <td>{{after_weeks.week_2.Monday.booking_date}}</td>
+            <td>{{after_weeks.week_2.Monday.time_slot_12}}</td>
+            <td>{{after_weeks.week_2.Monday.time_slot_14}}</td>
+            <td>{{after_weeks.week_2.Monday.time_slot_16}}</td>
+            <td>{{after_weeks.week_2.Monday.time_slot_18}}</td>
+            <td>{{after_weeks.week_2.Monday.time_slot_20}}</td>
+            <td>{{after_weeks.week_2.Monday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Tuesday</td>
+            {% if after_weeks.week_2%}
+            <td>{{after_weeks.week_2.Tuesday.booking_date}}</td>
+            <td>{{after_weeks.week_2.Tuesday.time_slot_12}}</td>
+            <td>{{after_weeks.week_2.Tuesday.time_slot_14}}</td>
+            <td>{{after_weeks.week_2.Tuesday.time_slot_16}}</td>
+            <td>{{after_weeks.week_2.Tuesday.time_slot_18}}</td>
+            <td>{{after_weeks.week_2.Tuesday.time_slot_20}}</td>
+            <td>{{after_weeks.week_2.Tuesday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Wednesday</td>
+            {% if after_weeks.week_2%}
+            <td>{{after_weeks.week_2.Wednesday.booking_date}}</td>
+            <td>{{after_weeks.week_2.Wednesday.time_slot_12}}</td>
+            <td>{{after_weeks.week_2.Wednesday.time_slot_14}}</td>
+            <td>{{after_weeks.week_2.Wednesday.time_slot_16}}</td>
+            <td>{{after_weeks.week_2.Wednesday.time_slot_18}}</td>
+            <td>{{after_weeks.week_2.Wednesday.time_slot_20}}</td>
+            <td>{{after_weeks.week_2.Wednesday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Thursday</td>
+            {% if after_weeks.week_2%}
+            <td>{{after_weeks.week_2.Thursday.booking_date}}</td>
+            <td>{{after_weeks.week_2.Thursday.time_slot_12}}</td>
+            <td>{{after_weeks.week_2.Thursday.time_slot_14}}</td>
+            <td>{{after_weeks.week_2.Thursday.time_slot_16}}</td>
+            <td>{{after_weeks.week_2.Thursday.time_slot_18}}</td>
+            <td>{{after_weeks.week_2.Thursday.time_slot_20}}</td>
+            <td>{{after_weeks.week_2.Thursday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Friday</td>
+            {% if after_weeks.week_2%}
+            <td>{{after_weeks.week_2.Friday.booking_date}}</td>
+            <td>{{after_weeks.week_2.Friday.time_slot_12}}</td>
+            <td>{{after_weeks.week_2.Friday.time_slot_14}}</td>
+            <td>{{after_weeks.week_2.Friday.time_slot_16}}</td>
+            <td>{{after_weeks.week_2.Friday.time_slot_18}}</td>
+            <td>{{after_weeks.week_2.Friday.time_slot_20}}</td>
+            <td>{{after_weeks.week_2.Friday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Saturday</td>
+            {% if after_weeks.week_2%}
+            <td>{{after_weeks.week_2.Saturday.booking_date}}</td>
+            <td>{{after_weeks.week_2.Saturday.time_slot_12}}</td>
+            <td>{{after_weeks.week_2.Saturday.time_slot_14}}</td>
+            <td>{{after_weeks.week_2.Saturday.time_slot_16}}</td>
+            <td>{{after_weeks.week_2.Saturday.time_slot_18}}</td>
+            <td>{{after_weeks.week_2.Saturday.time_slot_20}}</td>
+            <td>{{after_weeks.week_2.Saturday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Sunday</td>
+            {% if after_weeks.week_2%}
+            <td>{{after_weeks.week_2.Sunday.booking_date}}</td>
+            <td>{{after_weeks.week_2.Sunday.time_slot_12}}</td>
+            <td>{{after_weeks.week_2.Sunday.time_slot_14}}</td>
+            <td>{{after_weeks.week_2.Sunday.time_slot_16}}</td>
+            <td>{{after_weeks.week_2.Sunday.time_slot_18}}</td>
+            <td>{{after_weeks.week_2.Sunday.time_slot_20}}</td>
+            <td>{{after_weeks.week_2.Sunday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+    </tbody>
+    <tfoot class="table-bordered">
+        <tr>
+            <th colspan="2" class="text-center">Week {{after_weeks.week_2.week_meta.week_num}}</th>
+            <th>12:00</th>
+            <th>14:00</th>
+            <th>16:00</th>
+            <th>18:00</th>
+            <th>20:00</th>
+            <th>22:00</th>
+        </tr>
+    </tfoot>
+</table>
+<!-- week_3 after this week-->
+<table class="table table-striped table-sm">
+    <thead class="table-bordered">
+        <tr>
+            <th colspan="2" class="text-center">Week
+                {{after_weeks.week_3.week_meta.week_num}}</th>
+            <th colspan="6" class="text-center">available table(s) from ...</th>
+        </tr>
+        <tr>
+            <th colspan="2" class="text-center"><i>from the</i> {{after_weeks.week_3.week_meta.week_start}} <i>till
+                    the</i> {{after_weeks.week_3.week_meta.week_end}}</th>
+            <th>12:00</th>
+            <th>14:00</th>
+            <th>16:00</th>
+            <th>18:00</th>
+            <th>20:00</th>
+            <th>22:00</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Monday</td>
+            {% if after_weeks.week_3%}
+            <td>{{after_weeks.week_3.Monday.booking_date}}</td>
+            <td>{{after_weeks.week_3.Monday.time_slot_12}}</td>
+            <td>{{after_weeks.week_3.Monday.time_slot_14}}</td>
+            <td>{{after_weeks.week_3.Monday.time_slot_16}}</td>
+            <td>{{after_weeks.week_3.Monday.time_slot_18}}</td>
+            <td>{{after_weeks.week_3.Monday.time_slot_20}}</td>
+            <td>{{after_weeks.week_3.Monday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Tuesday</td>
+            {% if after_weeks.week_3%}
+            <td>{{after_weeks.week_3.Tuesday.booking_date}}</td>
+            <td>{{after_weeks.week_3.Tuesday.time_slot_12}}</td>
+            <td>{{after_weeks.week_3.Tuesday.time_slot_14}}</td>
+            <td>{{after_weeks.week_3.Tuesday.time_slot_16}}</td>
+            <td>{{after_weeks.week_3.Tuesday.time_slot_18}}</td>
+            <td>{{after_weeks.week_3.Tuesday.time_slot_20}}</td>
+            <td>{{after_weeks.week_3.Tuesday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Wednesday</td>
+            {% if after_weeks.week_3%}
+            <td>{{after_weeks.week_3.Wednesday.booking_date}}</td>
+            <td>{{after_weeks.week_3.Wednesday.time_slot_12}}</td>
+            <td>{{after_weeks.week_3.Wednesday.time_slot_14}}</td>
+            <td>{{after_weeks.week_3.Wednesday.time_slot_16}}</td>
+            <td>{{after_weeks.week_3.Wednesday.time_slot_18}}</td>
+            <td>{{after_weeks.week_3.Wednesday.time_slot_20}}</td>
+            <td>{{after_weeks.week_3.Wednesday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Thursday</td>
+            {% if after_weeks.week_3%}
+            <td>{{after_weeks.week_3.Thursday.booking_date}}</td>
+            <td>{{after_weeks.week_3.Thursday.time_slot_12}}</td>
+            <td>{{after_weeks.week_3.Thursday.time_slot_14}}</td>
+            <td>{{after_weeks.week_3.Thursday.time_slot_16}}</td>
+            <td>{{after_weeks.week_3.Thursday.time_slot_18}}</td>
+            <td>{{after_weeks.week_3.Thursday.time_slot_20}}</td>
+            <td>{{after_weeks.week_3.Thursday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Friday</td>
+            {% if after_weeks.week_3%}
+            <td>{{after_weeks.week_3.Friday.booking_date}}</td>
+            <td>{{after_weeks.week_3.Friday.time_slot_12}}</td>
+            <td>{{after_weeks.week_3.Friday.time_slot_14}}</td>
+            <td>{{after_weeks.week_3.Friday.time_slot_16}}</td>
+            <td>{{after_weeks.week_3.Friday.time_slot_18}}</td>
+            <td>{{after_weeks.week_3.Friday.time_slot_20}}</td>
+            <td>{{after_weeks.week_3.Friday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Saturday</td>
+            {% if after_weeks.week_3%}
+            <td>{{after_weeks.week_3.Saturday.booking_date}}</td>
+            <td>{{after_weeks.week_3.Saturday.time_slot_12}}</td>
+            <td>{{after_weeks.week_3.Saturday.time_slot_14}}</td>
+            <td>{{after_weeks.week_3.Saturday.time_slot_16}}</td>
+            <td>{{after_weeks.week_3.Saturday.time_slot_18}}</td>
+            <td>{{after_weeks.week_3.Saturday.time_slot_20}}</td>
+            <td>{{after_weeks.week_3.Saturday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Sunday</td>
+            {% if after_weeks.week_3%}
+            <td>{{after_weeks.week_3.Sunday.booking_date}}</td>
+            <td>{{after_weeks.week_3.Sunday.time_slot_12}}</td>
+            <td>{{after_weeks.week_3.Sunday.time_slot_14}}</td>
+            <td>{{after_weeks.week_3.Sunday.time_slot_16}}</td>
+            <td>{{after_weeks.week_3.Sunday.time_slot_18}}</td>
+            <td>{{after_weeks.week_3.Sunday.time_slot_20}}</td>
+            <td>{{after_weeks.week_3.Sunday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+    </tbody>
+    <tfoot class="table-bordered">
+        <tr>
+            <th colspan="2" class="text-center">Week {{after_weeks.week_3.week_meta.week_num}}</th>
+            <th>12:00</th>
+            <th>14:00</th>
+            <th>16:00</th>
+            <th>18:00</th>
+            <th>20:00</th>
+            <th>22:00</th>
+        </tr>
+    </tfoot>
+</table>
+<!-- week_4 after this week-->
+<table class="table table-striped table-sm">
+    <thead class="table-bordered">
+        <tr>
+            <th colspan="2" class="text-center">Week
+                {{after_weeks.week_4.week_meta.week_num}}</th>
+            <th colspan="6" class="text-center">available table(s) from ...</th>
+        </tr>
+        <tr>
+            <th colspan="2" class="text-center"><i>from the</i> {{after_weeks.week_4.week_meta.week_start}} <i>till
+                    the</i> {{after_weeks.week_4.week_meta.week_end}}</th>
+            <th>12:00</th>
+            <th>14:00</th>
+            <th>16:00</th>
+            <th>18:00</th>
+            <th>20:00</th>
+            <th>22:00</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Monday</td>
+            {% if after_weeks.week_4%}
+            <td>{{after_weeks.week_4.Monday.booking_date}}</td>
+            <td>{{after_weeks.week_4.Monday.time_slot_12}}</td>
+            <td>{{after_weeks.week_4.Monday.time_slot_14}}</td>
+            <td>{{after_weeks.week_4.Monday.time_slot_16}}</td>
+            <td>{{after_weeks.week_4.Monday.time_slot_18}}</td>
+            <td>{{after_weeks.week_4.Monday.time_slot_20}}</td>
+            <td>{{after_weeks.week_4.Monday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Tuesday</td>
+            {% if after_weeks.week_4%}
+            <td>{{after_weeks.week_4.Tuesday.booking_date}}</td>
+            <td>{{after_weeks.week_4.Tuesday.time_slot_12}}</td>
+            <td>{{after_weeks.week_4.Tuesday.time_slot_14}}</td>
+            <td>{{after_weeks.week_4.Tuesday.time_slot_16}}</td>
+            <td>{{after_weeks.week_4.Tuesday.time_slot_18}}</td>
+            <td>{{after_weeks.week_4.Tuesday.time_slot_20}}</td>
+            <td>{{after_weeks.week_4.Tuesday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Wednesday</td>
+            {% if after_weeks.week_4%}
+            <td>{{after_weeks.week_4.Wednesday.booking_date}}</td>
+            <td>{{after_weeks.week_4.Wednesday.time_slot_12}}</td>
+            <td>{{after_weeks.week_4.Wednesday.time_slot_14}}</td>
+            <td>{{after_weeks.week_4.Wednesday.time_slot_16}}</td>
+            <td>{{after_weeks.week_4.Wednesday.time_slot_18}}</td>
+            <td>{{after_weeks.week_4.Wednesday.time_slot_20}}</td>
+            <td>{{after_weeks.week_4.Wednesday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Thursday</td>
+            {% if after_weeks.week_4%}
+            <td>{{after_weeks.week_4.Thursday.booking_date}}</td>
+            <td>{{after_weeks.week_4.Thursday.time_slot_12}}</td>
+            <td>{{after_weeks.week_4.Thursday.time_slot_14}}</td>
+            <td>{{after_weeks.week_4.Thursday.time_slot_16}}</td>
+            <td>{{after_weeks.week_4.Thursday.time_slot_18}}</td>
+            <td>{{after_weeks.week_4.Thursday.time_slot_20}}</td>
+            <td>{{after_weeks.week_4.Thursday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Friday</td>
+            {% if after_weeks.week_4%}
+            <td>{{after_weeks.week_4.Friday.booking_date}}</td>
+            <td>{{after_weeks.week_4.Friday.time_slot_12}}</td>
+            <td>{{after_weeks.week_4.Friday.time_slot_14}}</td>
+            <td>{{after_weeks.week_4.Friday.time_slot_16}}</td>
+            <td>{{after_weeks.week_4.Friday.time_slot_18}}</td>
+            <td>{{after_weeks.week_4.Friday.time_slot_20}}</td>
+            <td>{{after_weeks.week_4.Friday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Saturday</td>
+            {% if after_weeks.week_4%}
+            <td>{{after_weeks.week_4.Saturday.booking_date}}</td>
+            <td>{{after_weeks.week_4.Saturday.time_slot_12}}</td>
+            <td>{{after_weeks.week_4.Saturday.time_slot_14}}</td>
+            <td>{{after_weeks.week_4.Saturday.time_slot_16}}</td>
+            <td>{{after_weeks.week_4.Saturday.time_slot_18}}</td>
+            <td>{{after_weeks.week_4.Saturday.time_slot_20}}</td>
+            <td>{{after_weeks.week_4.Saturday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Sunday</td>
+            {% if after_weeks.week_4%}
+            <td>{{after_weeks.week_4.Sunday.booking_date}}</td>
+            <td>{{after_weeks.week_4.Sunday.time_slot_12}}</td>
+            <td>{{after_weeks.week_4.Sunday.time_slot_14}}</td>
+            <td>{{after_weeks.week_4.Sunday.time_slot_16}}</td>
+            <td>{{after_weeks.week_4.Sunday.time_slot_18}}</td>
+            <td>{{after_weeks.week_4.Sunday.time_slot_20}}</td>
+            <td>{{after_weeks.week_4.Sunday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+    </tbody>
+    <tfoot class="table-bordered">
+        <tr>
+            <th colspan="2" class="text-center">Week {{after_weeks.week_4.week_meta.week_num}}</th>
+            <th>12:00</th>
+            <th>14:00</th>
+            <th>16:00</th>
+            <th>18:00</th>
+            <th>20:00</th>
+            <th>22:00</th>
+        </tr>
+    </tfoot>
+</table>
+<!-- week_5 after this week-->
+<table class="table table-striped table-sm">
+    <thead class="table-bordered">
+        <tr>
+            <th colspan="2" class="text-center">Week
+                {{after_weeks.week_5.week_meta.week_num}}</th>
+            <th colspan="6" class="text-center">available table(s) from ...</th>
+        </tr>
+        <tr>
+            <th colspan="2" class="text-center"><i>from the</i> {{after_weeks.week_5.week_meta.week_start}} <i>till
+                    the</i> {{after_weeks.week_5.week_meta.week_end}}</th>
+            <th>12:00</th>
+            <th>14:00</th>
+            <th>16:00</th>
+            <th>18:00</th>
+            <th>20:00</th>
+            <th>22:00</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Monday</td>
+            {% if after_weeks.week_5%}
+            <td>{{after_weeks.week_5.Monday.booking_date}}</td>
+            <td>{{after_weeks.week_5.Monday.time_slot_12}}</td>
+            <td>{{after_weeks.week_5.Monday.time_slot_14}}</td>
+            <td>{{after_weeks.week_5.Monday.time_slot_16}}</td>
+            <td>{{after_weeks.week_5.Monday.time_slot_18}}</td>
+            <td>{{after_weeks.week_5.Monday.time_slot_20}}</td>
+            <td>{{after_weeks.week_5.Monday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Tuesday</td>
+            {% if after_weeks.week_5%}
+            <td>{{after_weeks.week_5.Tuesday.booking_date}}</td>
+            <td>{{after_weeks.week_5.Tuesday.time_slot_12}}</td>
+            <td>{{after_weeks.week_5.Tuesday.time_slot_14}}</td>
+            <td>{{after_weeks.week_5.Tuesday.time_slot_16}}</td>
+            <td>{{after_weeks.week_5.Tuesday.time_slot_18}}</td>
+            <td>{{after_weeks.week_5.Tuesday.time_slot_20}}</td>
+            <td>{{after_weeks.week_5.Tuesday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Wednesday</td>
+            {% if after_weeks.week_5%}
+            <td>{{after_weeks.week_5.Wednesday.booking_date}}</td>
+            <td>{{after_weeks.week_5.Wednesday.time_slot_12}}</td>
+            <td>{{after_weeks.week_5.Wednesday.time_slot_14}}</td>
+            <td>{{after_weeks.week_5.Wednesday.time_slot_16}}</td>
+            <td>{{after_weeks.week_5.Wednesday.time_slot_18}}</td>
+            <td>{{after_weeks.week_5.Wednesday.time_slot_20}}</td>
+            <td>{{after_weeks.week_5.Wednesday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Thursday</td>
+            {% if after_weeks.week_5%}
+            <td>{{after_weeks.week_5.Thursday.booking_date}}</td>
+            <td>{{after_weeks.week_5.Thursday.time_slot_12}}</td>
+            <td>{{after_weeks.week_5.Thursday.time_slot_14}}</td>
+            <td>{{after_weeks.week_5.Thursday.time_slot_16}}</td>
+            <td>{{after_weeks.week_5.Thursday.time_slot_18}}</td>
+            <td>{{after_weeks.week_5.Thursday.time_slot_20}}</td>
+            <td>{{after_weeks.week_5.Thursday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Friday</td>
+            {% if after_weeks.week_5%}
+            <td>{{after_weeks.week_5.Friday.booking_date}}</td>
+            <td>{{after_weeks.week_5.Friday.time_slot_12}}</td>
+            <td>{{after_weeks.week_5.Friday.time_slot_14}}</td>
+            <td>{{after_weeks.week_5.Friday.time_slot_16}}</td>
+            <td>{{after_weeks.week_5.Friday.time_slot_18}}</td>
+            <td>{{after_weeks.week_5.Friday.time_slot_20}}</td>
+            <td>{{after_weeks.week_5.Friday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Saturday</td>
+            {% if after_weeks.week_5%}
+            <td>{{after_weeks.week_5.Saturday.booking_date}}</td>
+            <td>{{after_weeks.week_5.Saturday.time_slot_12}}</td>
+            <td>{{after_weeks.week_5.Saturday.time_slot_14}}</td>
+            <td>{{after_weeks.week_5.Saturday.time_slot_16}}</td>
+            <td>{{after_weeks.week_5.Saturday.time_slot_18}}</td>
+            <td>{{after_weeks.week_5.Saturday.time_slot_20}}</td>
+            <td>{{after_weeks.week_5.Saturday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Sunday</td>
+            {% if after_weeks.week_5%}
+            <td>{{after_weeks.week_5.Sunday.booking_date}}</td>
+            <td>{{after_weeks.week_5.Sunday.time_slot_12}}</td>
+            <td>{{after_weeks.week_5.Sunday.time_slot_14}}</td>
+            <td>{{after_weeks.week_5.Sunday.time_slot_16}}</td>
+            <td>{{after_weeks.week_5.Sunday.time_slot_18}}</td>
+            <td>{{after_weeks.week_5.Sunday.time_slot_20}}</td>
+            <td>{{after_weeks.week_5.Sunday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+    </tbody>
+    <tfoot class="table-bordered">
+        <tr>
+            <th colspan="2" class="text-center">Week {{after_weeks.week_5.week_meta.week_num}}</th>
+            <th>12:00</th>
+            <th>14:00</th>
+            <th>16:00</th>
+            <th>18:00</th>
+            <th>20:00</th>
+            <th>22:00</th>
+        </tr>
+    </tfoot>
+</table>
+<!-- week_6 after this week-->
+<table class="table table-striped table-sm">
+    <thead class="table-bordered">
+        <tr>
+            <th colspan="2" class="text-center">Week
+                {{after_weeks.week_6.week_meta.week_num}}</th>
+            <th colspan="6" class="text-center">available table(s) from ...</th>
+        </tr>
+        <tr>
+            <th colspan="2" class="text-center"><i>from the</i> {{after_weeks.week_6.week_meta.week_start}} <i>till
+                    the</i> {{after_weeks.week_6.week_meta.week_end}}</th>
+            <th>12:00</th>
+            <th>14:00</th>
+            <th>16:00</th>
+            <th>18:00</th>
+            <th>20:00</th>
+            <th>22:00</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Monday</td>
+            {% if after_weeks.week_6%}
+            <td>{{after_weeks.week_6.Monday.booking_date}}</td>
+            <td>{{after_weeks.week_6.Monday.time_slot_12}}</td>
+            <td>{{after_weeks.week_6.Monday.time_slot_14}}</td>
+            <td>{{after_weeks.week_6.Monday.time_slot_16}}</td>
+            <td>{{after_weeks.week_6.Monday.time_slot_18}}</td>
+            <td>{{after_weeks.week_6.Monday.time_slot_20}}</td>
+            <td>{{after_weeks.week_6.Monday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Tuesday</td>
+            {% if after_weeks.week_6%}
+            <td>{{after_weeks.week_6.Tuesday.booking_date}}</td>
+            <td>{{after_weeks.week_6.Tuesday.time_slot_12}}</td>
+            <td>{{after_weeks.week_6.Tuesday.time_slot_14}}</td>
+            <td>{{after_weeks.week_6.Tuesday.time_slot_16}}</td>
+            <td>{{after_weeks.week_6.Tuesday.time_slot_18}}</td>
+            <td>{{after_weeks.week_6.Tuesday.time_slot_20}}</td>
+            <td>{{after_weeks.week_6.Tuesday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Wednesday</td>
+            {% if after_weeks.week_6%}
+            <td>{{after_weeks.week_6.Wednesday.booking_date}}</td>
+            <td>{{after_weeks.week_6.Wednesday.time_slot_12}}</td>
+            <td>{{after_weeks.week_6.Wednesday.time_slot_14}}</td>
+            <td>{{after_weeks.week_6.Wednesday.time_slot_16}}</td>
+            <td>{{after_weeks.week_6.Wednesday.time_slot_18}}</td>
+            <td>{{after_weeks.week_6.Wednesday.time_slot_20}}</td>
+            <td>{{after_weeks.week_6.Wednesday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Thursday</td>
+            {% if after_weeks.week_6%}
+            <td>{{after_weeks.week_6.Thursday.booking_date}}</td>
+            <td>{{after_weeks.week_6.Thursday.time_slot_12}}</td>
+            <td>{{after_weeks.week_6.Thursday.time_slot_14}}</td>
+            <td>{{after_weeks.week_6.Thursday.time_slot_16}}</td>
+            <td>{{after_weeks.week_6.Thursday.time_slot_18}}</td>
+            <td>{{after_weeks.week_6.Thursday.time_slot_20}}</td>
+            <td>{{after_weeks.week_6.Thursday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Friday</td>
+            {% if after_weeks.week_6%}
+            <td>{{after_weeks.week_6.Friday.booking_date}}</td>
+            <td>{{after_weeks.week_6.Friday.time_slot_12}}</td>
+            <td>{{after_weeks.week_6.Friday.time_slot_14}}</td>
+            <td>{{after_weeks.week_6.Friday.time_slot_16}}</td>
+            <td>{{after_weeks.week_6.Friday.time_slot_18}}</td>
+            <td>{{after_weeks.week_6.Friday.time_slot_20}}</td>
+            <td>{{after_weeks.week_6.Friday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Saturday</td>
+            {% if after_weeks.week_6%}
+            <td>{{after_weeks.week_6.Saturday.booking_date}}</td>
+            <td>{{after_weeks.week_6.Saturday.time_slot_12}}</td>
+            <td>{{after_weeks.week_6.Saturday.time_slot_14}}</td>
+            <td>{{after_weeks.week_6.Saturday.time_slot_16}}</td>
+            <td>{{after_weeks.week_6.Saturday.time_slot_18}}</td>
+            <td>{{after_weeks.week_6.Saturday.time_slot_20}}</td>
+            <td>{{after_weeks.week_6.Saturday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Sunday</td>
+            {% if after_weeks.week_6%}
+            <td>{{after_weeks.week_6.Sunday.booking_date}}</td>
+            <td>{{after_weeks.week_6.Sunday.time_slot_12}}</td>
+            <td>{{after_weeks.week_6.Sunday.time_slot_14}}</td>
+            <td>{{after_weeks.week_6.Sunday.time_slot_16}}</td>
+            <td>{{after_weeks.week_6.Sunday.time_slot_18}}</td>
+            <td>{{after_weeks.week_6.Sunday.time_slot_20}}</td>
+            <td>{{after_weeks.week_6.Sunday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+    </tbody>
+    <tfoot class="table-bordered">
+        <tr>
+            <th colspan="2" class="text-center">Week {{after_weeks.week_6.week_meta.week_num}}</th>
+            <th>12:00</th>
+            <th>14:00</th>
+            <th>16:00</th>
+            <th>18:00</th>
+            <th>20:00</th>
+            <th>22:00</th>
+        </tr>
+    </tfoot>
+</table>
+<!-- week_7 after this week-->
+<table class="table table-striped table-sm">
+    <thead class="table-bordered">
+        <tr>
+            <th colspan="2" class="text-center">Week
+                {{after_weeks.week_7.week_meta.week_num}}</th>
+            <th colspan="6" class="text-center">available table(s) from ...</th>
+        </tr>
+        <tr>
+            <th colspan="2" class="text-center"><i>from the</i> {{after_weeks.week_7.week_meta.week_start}} <i>till
+                    the</i> {{after_weeks.week_7.week_meta.week_end}}</th>
+            <th>12:00</th>
+            <th>14:00</th>
+            <th>16:00</th>
+            <th>18:00</th>
+            <th>20:00</th>
+            <th>22:00</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Monday</td>
+            {% if after_weeks.week_7%}
+            <td>{{after_weeks.week_7.Monday.booking_date}}</td>
+            <td>{{after_weeks.week_7.Monday.time_slot_12}}</td>
+            <td>{{after_weeks.week_7.Monday.time_slot_14}}</td>
+            <td>{{after_weeks.week_7.Monday.time_slot_16}}</td>
+            <td>{{after_weeks.week_7.Monday.time_slot_18}}</td>
+            <td>{{after_weeks.week_7.Monday.time_slot_20}}</td>
+            <td>{{after_weeks.week_7.Monday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Tuesday</td>
+            {% if after_weeks.week_7%}
+            <td>{{after_weeks.week_7.Tuesday.booking_date}}</td>
+            <td>{{after_weeks.week_7.Tuesday.time_slot_12}}</td>
+            <td>{{after_weeks.week_7.Tuesday.time_slot_14}}</td>
+            <td>{{after_weeks.week_7.Tuesday.time_slot_16}}</td>
+            <td>{{after_weeks.week_7.Tuesday.time_slot_18}}</td>
+            <td>{{after_weeks.week_7.Tuesday.time_slot_20}}</td>
+            <td>{{after_weeks.week_7.Tuesday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Wednesday</td>
+            {% if after_weeks.week_7%}
+            <td>{{after_weeks.week_7.Wednesday.booking_date}}</td>
+            <td>{{after_weeks.week_7.Wednesday.time_slot_12}}</td>
+            <td>{{after_weeks.week_7.Wednesday.time_slot_14}}</td>
+            <td>{{after_weeks.week_7.Wednesday.time_slot_16}}</td>
+            <td>{{after_weeks.week_7.Wednesday.time_slot_18}}</td>
+            <td>{{after_weeks.week_7.Wednesday.time_slot_20}}</td>
+            <td>{{after_weeks.week_7.Wednesday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Thursday</td>
+            {% if after_weeks.week_7%}
+            <td>{{after_weeks.week_7.Thursday.booking_date}}</td>
+            <td>{{after_weeks.week_7.Thursday.time_slot_12}}</td>
+            <td>{{after_weeks.week_7.Thursday.time_slot_14}}</td>
+            <td>{{after_weeks.week_7.Thursday.time_slot_16}}</td>
+            <td>{{after_weeks.week_7.Thursday.time_slot_18}}</td>
+            <td>{{after_weeks.week_7.Thursday.time_slot_20}}</td>
+            <td>{{after_weeks.week_7.Thursday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Friday</td>
+            {% if after_weeks.week_7%}
+            <td>{{after_weeks.week_7.Friday.booking_date}}</td>
+            <td>{{after_weeks.week_7.Friday.time_slot_12}}</td>
+            <td>{{after_weeks.week_7.Friday.time_slot_14}}</td>
+            <td>{{after_weeks.week_7.Friday.time_slot_16}}</td>
+            <td>{{after_weeks.week_7.Friday.time_slot_18}}</td>
+            <td>{{after_weeks.week_7.Friday.time_slot_20}}</td>
+            <td>{{after_weeks.week_7.Friday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Saturday</td>
+            {% if after_weeks.week_7%}
+            <td>{{after_weeks.week_7.Saturday.booking_date}}</td>
+            <td>{{after_weeks.week_7.Saturday.time_slot_12}}</td>
+            <td>{{after_weeks.week_7.Saturday.time_slot_14}}</td>
+            <td>{{after_weeks.week_7.Saturday.time_slot_16}}</td>
+            <td>{{after_weeks.week_7.Saturday.time_slot_18}}</td>
+            <td>{{after_weeks.week_7.Saturday.time_slot_20}}</td>
+            <td>{{after_weeks.week_7.Saturday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Sunday</td>
+            {% if after_weeks.week_7%}
+            <td>{{after_weeks.week_7.Sunday.booking_date}}</td>
+            <td>{{after_weeks.week_7.Sunday.time_slot_12}}</td>
+            <td>{{after_weeks.week_7.Sunday.time_slot_14}}</td>
+            <td>{{after_weeks.week_7.Sunday.time_slot_16}}</td>
+            <td>{{after_weeks.week_7.Sunday.time_slot_18}}</td>
+            <td>{{after_weeks.week_7.Sunday.time_slot_20}}</td>
+            <td>{{after_weeks.week_7.Sunday.time_slot_22}}</td>
+            {% else %}
+            <td colspan="7" class="text-center"><i>(no information available)</i></td>
+            {% endif %}
+        </tr>
+    </tbody>
+    <tfoot class="table-bordered">
+        <tr>
+            <th colspan="2" class="text-center">Week {{after_weeks.week_7.week_meta.week_num}}</th>
+            <th>12:00</th>
+            <th>14:00</th>
+            <th>16:00</th>
+            <th>18:00</th>
+            <th>20:00</th>
+            <th>22:00</th>
+        </tr>
+    </tfoot>
+</table>
+
 {% endblock content %}
