@@ -5,6 +5,7 @@
 
 {% block content %}
 <h1>Booking Page</h1>
+{% if user_logged_in %}
 <form action="addrecord/" method="post">
     {% csrf_token %}
     <label for="date">booking date :</label>
@@ -22,6 +23,11 @@
     </select><br>
     <input type="submit" value="Submit">
 </form>
+{% else %}
+<p>On this page you can view our available tables.<br>
+    Please, login to book a table. You can click <a href="{% url 'login' %}">here</a> to login or reset your password
+    and <a href="{% url 'signup' %}">here</a> to sign up.</p>
+{% endif %}
 <table class="table table-striped table-sm">
     <thead class="table-bordered">
         <tr>

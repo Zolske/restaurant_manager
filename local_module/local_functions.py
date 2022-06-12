@@ -194,7 +194,6 @@ def booking_context_object(database):
     this_week_meta['week_num'] = this_week_is_num
     this_week_meta['week_start'] = first_date_of_week(todays_date.strftime("%Y-%W"))
     this_week_meta['week_end'] = last_date_of_week(todays_date.strftime("%Y-%W"))
-    
     after_weeks = {'week_1':'', 'week_2':'', 'week_3':'', 'week_4':'', 'week_5':'', 'week_6':'', 'week_7':''}
     after_weeks['week_1'] = write_after_weeks(1, database)
     after_weeks['week_2'] = write_after_weeks(2, database)
@@ -203,26 +202,18 @@ def booking_context_object(database):
     after_weeks['week_5'] = write_after_weeks(5, database)
     after_weeks['week_6'] = write_after_weeks(6, database)
     after_weeks['week_7'] = write_after_weeks(7, database)
-    
-    # # attach data for the rest of the next 7 weeks
-
-    # for week in range(7):
-    #     week_name = 'week_' + str(week)
-    #     myVars = vars()
-    #     myVars[week_name] = {'week_meta':'',}
-        
-    #     next_week_num = int(this_week_is_num) + week +1
-    #     # week_after = {}
-    #     week_meta = {'week_num':'', 'week_start':'', 'week_end':''}
-    #     # add this weeks +1 week number, start date and end date
-    #     week_meta['week_num'] = next_week_num
-    #     week_meta['week_start'] = first_date_of_week(todays_date.strftime("%Y")+"-"+str(next_week_num))
-    #     week_meta['week_end'] = last_date_of_week(todays_date.strftime("%Y")+"-"+str(next_week_num))
-    #     myVars[week_name] = week_meta
-    #     # find all booking dates from this week +1
-    #     next_week_booking = list(database.objects.filter(booking_date__week=next_week_num).order_by('booking_date').values())
-    #     for day in next_week_booking:
-    #         myVars[week_name] = day
-    #     after_weeks = myVars[week_name]
-        
+          
     return [this_week_dic, this_week_meta, after_weeks]
+
+##################################################################
+# django.contrib.auth
+
+
+from django.db import models
+from django.contrib.auth import get_user_model
+
+User=get_user_model()
+
+# print(User.__dict__)
+
+print(User.objects)
