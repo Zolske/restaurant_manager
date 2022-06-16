@@ -21,13 +21,13 @@ def first_date_of_week(year_week=str):
     '''
     first_date = datetime.strptime(year_week + '-1', "%Y-%W-%w")
     if first_date.strftime("%d") == '01' or first_date.strftime("%d") == '21' or first_date.strftime("%d") == '31':
-        return first_date.strftime("%dst of %b")
+        return first_date.strftime("%dst of %B")
     elif first_date.strftime("%d") == '02' or first_date.strftime("%d") == '22':
-        return first_date.strftime("%dnd of %b")
+        return first_date.strftime("%dnd of %B")
     elif first_date.strftime("%d") == '03' or first_date.strftime("%d") == '23':
-        return first_date.strftime("%drd of %b")
+        return first_date.strftime("%drd of %B")
     else:
-        return first_date.strftime("%dth of %b")
+        return first_date.strftime("%dth of %B")
 
 def last_date_of_week(year_week=str):
     '''
@@ -37,13 +37,13 @@ def last_date_of_week(year_week=str):
     '''
     last_date = datetime.strptime(year_week + '-0', "%Y-%W-%w")
     if last_date.strftime("%d") == '01' or last_date.strftime("%d") == '21' or last_date.strftime("%d") == '31':
-        return last_date.strftime("%dst of %b")
+        return last_date.strftime("%dst of %B")
     elif last_date.strftime("%d") == '02' or last_date.strftime("%d") == '22' :
-        return last_date.strftime("%dnd of %b")
+        return last_date.strftime("%dnd of %B")
     elif last_date.strftime("%d") == '03' or last_date.strftime("%d") == '23':
-        return last_date.strftime("%drd of %b")
+        return last_date.strftime("%drd of %B")
     else:
-        return last_date.strftime("%dth of %b")
+        return last_date.strftime("%dth of %B")
     
 # def update_available_tables_model():
 #     for weekday_num in range(7):
@@ -209,11 +209,14 @@ def booking_context_object(database):
 # django.contrib.auth
 
 
-from django.db import models
-from django.contrib.auth import get_user_model
+# from django.db import models
+# from django.contrib.auth import get_user_model
+# from django.contrib.auth.models import User
 
-User=get_user_model()
+# User=get_user_model()
 
-# print(User.__dict__)
+# # print(User.__dict__)
 
-print(User.objects)
+# # print(User.objects.all().values())
+# print(User.objects.values_list('username'))
+

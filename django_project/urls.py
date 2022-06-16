@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
+from mediauploader import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -23,5 +24,7 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
     path("bookings/", include("booking.urls")),
+    # just to test image upload with cloudinary
+    path("", views.home, name='testImage'),
     path("", include("pages.urls")),
 ]

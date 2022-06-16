@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'debug_toolbar', # django debug toolbar, take out after deployment
     'django_extensions',
     'booking.apps.BookingConfig',
+    'mediauploader', # just to test image upload with cloudinary
 ]
 
 MIDDLEWARE = [

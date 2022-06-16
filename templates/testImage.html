@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test Image side</title>
+</head>
+
+<body>
+    <h1>picture test</h1>
+    {% for picture in pictures %}
+    <img src="{{ picture.image.url }}" alt="">
+    {% endfor %}
+    <p> {{ hello }}</p>
+</body>
+
+</html>

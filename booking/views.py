@@ -6,24 +6,18 @@ from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
 import datetime
-from .models import AvailableTable
+from .models import AvailableTable, User_Bookings
 from local_module.local_functions import weekday_num_to_django, delete_passed_days, add_missing_records, booking_context_object
-
-# TODO if no errors appear delete comment
-# # todays date
-# today_date = 0
-# # todays day as a number, Sunday = 0
-# today_day_num = 0
-# # todays week starting from Monday
-# today_week = 0
-# # todays year
-# today_year = 0
-
-    
+   
 def available_tables(request):
     delete_passed_days(AvailableTable)
     add_missing_records(AvailableTable)
     this_week_dic, this_week_meta, after_weeks = booking_context_object(AvailableTable)
+    user_now = request.user
+    # has_bookings, user_booking_list = check_user_bookings(user_now, User_Bookings)
+    
+    user_booking_list = User_Bookings.objects.filter(booked_name=user_now).values()
+    has_bookings = len(user_booking_list)
             
     template = loader.get_template('booking/bookings.html')
     context = {
@@ -31,6 +25,9 @@ def available_tables(request):
     'this_week_dic' : this_week_dic,
     'this_week_meta' : this_week_meta,
     'after_weeks' : after_weeks,
+    'current_user' : user_now,
+    'has_bookings' : has_bookings,
+    'user_booking_list' : user_booking_list,
     }
     # is set to true only if the user is logged in
     if request.user.is_authenticated:
@@ -64,5 +61,15 @@ def add_record(request):
                     value_22 = value
                    
             new_record = AvailableTable(booking_date=value_booking, time_slot_12=value_12, time_slot_14=value_14, time_slot_16=value_16, time_slot_18=value_18, time_slot_20=value_20, time_slot_22=value_22 )
-            new_record.save() 
+            new_record.save()
+    
+    print(type(value_booking))
+    
+    user_now = request.user
+    booking_time = new_time_slot[-2:]
+    booking_time += ':00'       
+    table_num = int(new_num_tables)
+    new_booking_record = User_Bookings(booked_name=user_now, booked_date=value_booking, booked_time=booking_time, booked_tables=table_num)
+    new_booking_record.save()
+    
     return HttpResponseRedirect(reverse('bookings'))
