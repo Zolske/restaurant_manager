@@ -34,4 +34,3 @@ class User_Bookings(models.Model):
     def __str__(self):
         return "%s (%s,%s,%s)" % (self.booked_name, self.booked_date,
                                   self.booked_time, self.booked_tables)    
-    
